@@ -14,16 +14,17 @@
         </bean>
 
     <!--创建SqlSessionFactoryBean-->
-        <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
             <!--配置数据源-->
             <property name="dataSource" ref="dataSource"></property>
             <!--配置MyBatis的核心配置文件-->
-            <property name="configLocation" value="SqlMapConfig.xml"></property>
+            <property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
             <!--配置实体类-->
             <property name="typeAliasesPackage" value="com.bjpowernode.pojo"></property>
         </bean>
     <!--创建mapper文件的扫描器-->
         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+            <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
             <property name="basePackage" value="com.bjpowernode.mapper"></property>
         </bean>
 </beans>
